@@ -7,29 +7,9 @@
 
 import SwiftUI
 
-struct AlertItem: Identifiable {
-    let id = UUID()
-    let title: String
-    let message: String
-    let dismissButton: Alert.Button
-}
-
-struct Alerts {
-    static let invalidDeviceInput = AlertItem(title: "Capturing Failed",
-                                              message: "We are unable to capture the video",
-                                              dismissButton: .default(Text("OK"))
-    )
-    
-    static let invalidScannedValue = AlertItem(title: "Invalid Value",
-                                               message: "Video scanned is not valid",
-                                               dismissButton: .default(Text("OK"))
-    )
-}
-
 struct ScannerView: View {
     
-    @State private var scannedValue = ""
-    @State private var alertItem: AlertItem?
+    @StateObject var scannerViewModel = ScannerViewModel()
     
     var body: some View {
         ZStack {
@@ -50,7 +30,9 @@ struct ScannerView: View {
                         .resizable()
                         .frame(width: 260, height: 260)
                     
-                    ScannerViewControllerRepresentable(scannedValue: $scannedValue, alertItem: $alertItem)
+                    ScannerViewControllerRepresentable(scannedValue: $scannerViewModel.scannedValue,
+                                                       alertItem: $scannerViewModel.alertItem
+                    )
                         .frame(width: 215, height: 215)
                         .foregroundStyle(Color.black)
                         .clipShape(RoundedRectangle(cornerRadius: 25.0))
@@ -62,17 +44,17 @@ struct ScannerView: View {
                         .foregroundStyle(Color(.label))
                         .padding()
                     
-                    Text(scannedValue.isEmpty ? "Not yet scanned" : scannedValue)
+                    Text(scannerViewModel.finalScannedValue)
                         .fixedSize(horizontal: false, vertical: true)
                         .font(.system(size: 14, weight: .bold))
-                        .foregroundStyle(Color(scannedValue.isEmpty ? .red : .green))
+                        .foregroundStyle(scannerViewModel.scannedValueColor)
                 }
                 
                 Button {
-                    if let url = URL(string: scannedValue), scannedValue.contains("http") {
+                    if let url = URL(string: scannerViewModel.scannedValue), scannerViewModel.scannedValue.contains("http") {
                         UIApplication.shared.open(url)
                     } else {
-                        print("Invalid Data to open")
+                        scannerViewModel.alertItem = Alerts.invalidUrl
                     }
                 } label: {
                     Label("Open in Browser", systemImage: "globe")
@@ -86,7 +68,7 @@ struct ScannerView: View {
                 
                 Spacer()
             }
-            .alert(item: $alertItem) { alertItem in
+            .alert(item: $scannerViewModel.alertItem) { alertItem in
                 Alert(title: Text(alertItem.title),
                       message: Text(alertItem.message),
                       dismissButton: alertItem.dismissButton

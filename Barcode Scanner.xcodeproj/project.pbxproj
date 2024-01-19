@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE33F6E52B5A9EB300DA3440 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33F6E42B5A9EB300DA3440 /* Alerts.swift */; };
+		CE33F6E72B5A9F0200DA3440 /* ScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33F6E62B5A9F0200DA3440 /* ScannerViewModel.swift */; };
 		CE91CD602B569CEF002586B7 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91CD5F2B569CEF002586B7 /* ScannerViewController.swift */; };
 		CE91CD622B5907B5002586B7 /* ScannerViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91CD612B5907B5002586B7 /* ScannerViewControllerRepresentable.swift */; };
 		CEC0BBE32B565AEC004524E2 /* Barcode_ScannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0BBE22B565AEC004524E2 /* Barcode_ScannerApp.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE33F6E42B5A9EB300DA3440 /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
+		CE33F6E62B5A9F0200DA3440 /* ScannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewModel.swift; sourceTree = "<group>"; };
 		CE91CD5E2B5695D5002586B7 /* Barcode-Scanner-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Barcode-Scanner-Info.plist"; sourceTree = SOURCE_ROOT; };
 		CE91CD5F2B569CEF002586B7 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		CE91CD612B5907B5002586B7 /* ScannerViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewControllerRepresentable.swift; sourceTree = "<group>"; };
@@ -39,6 +43,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE57F4C32B5AB7FE009B81EB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CEC0BBE42B565AEC004524E2 /* ScannerView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CE57F4C42B5AB860009B81EB /* Scanner */ = {
+			isa = PBXGroup;
+			children = (
+				CE57F4C52B5AB87F009B81EB /* ViewModel */,
+				CE57F4C32B5AB7FE009B81EB /* View */,
+			);
+			path = Scanner;
+			sourceTree = "<group>";
+		};
+		CE57F4C52B5AB87F009B81EB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CE33F6E62B5A9F0200DA3440 /* ScannerViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CE57F4C62B5AB8F3009B81EB /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				CE57F4C82B5ABA35009B81EB /* UIKitComponents */,
+				CE33F6E42B5A9EB300DA3440 /* Alerts.swift */,
+				CEC0BBF02B56636D004524E2 /* SetGradientBackground.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		CE57F4C72B5AB98D009B81EB /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				CE57F4C42B5AB860009B81EB /* Scanner */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		CE57F4C82B5ABA35009B81EB /* UIKitComponents */ = {
+			isa = PBXGroup;
+			children = (
+				CE91CD5F2B569CEF002586B7 /* ScannerViewController.swift */,
+				CE91CD612B5907B5002586B7 /* ScannerViewControllerRepresentable.swift */,
+			);
+			path = UIKitComponents;
+			sourceTree = "<group>";
+		};
 		CEC0BBD62B565AEC004524E2 = {
 			isa = PBXGroup;
 			children = (
@@ -59,10 +115,8 @@
 			isa = PBXGroup;
 			children = (
 				CEC0BBE22B565AEC004524E2 /* Barcode_ScannerApp.swift */,
-				CEC0BBE42B565AEC004524E2 /* ScannerView.swift */,
-				CEC0BBF02B56636D004524E2 /* SetGradientBackground.swift */,
-				CE91CD5F2B569CEF002586B7 /* ScannerViewController.swift */,
-				CE91CD612B5907B5002586B7 /* ScannerViewControllerRepresentable.swift */,
+				CE57F4C72B5AB98D009B81EB /* Screens */,
+				CE57F4C62B5AB8F3009B81EB /* Utilities */,
 				CEC0BBE62B565AEF004524E2 /* Assets.xcassets */,
 				CE91CD5E2B5695D5002586B7 /* Barcode-Scanner-Info.plist */,
 				CEC0BBE82B565AEF004524E2 /* Preview Content */,
@@ -148,10 +202,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE33F6E72B5A9F0200DA3440 /* ScannerViewModel.swift in Sources */,
 				CEC0BBE52B565AEC004524E2 /* ScannerView.swift in Sources */,
 				CEC0BBE32B565AEC004524E2 /* Barcode_ScannerApp.swift in Sources */,
 				CEC0BBF12B56636E004524E2 /* SetGradientBackground.swift in Sources */,
 				CE91CD602B569CEF002586B7 /* ScannerViewController.swift in Sources */,
+				CE33F6E52B5A9EB300DA3440 /* Alerts.swift in Sources */,
 				CE91CD622B5907B5002586B7 /* ScannerViewControllerRepresentable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
