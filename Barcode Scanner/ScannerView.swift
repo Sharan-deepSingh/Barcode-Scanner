@@ -7,9 +7,29 @@
 
 import SwiftUI
 
+struct AlertItem: Identifiable {
+    let id = UUID()
+    let title: String
+    let message: String
+    let dismissButton: Alert.Button
+}
+
+struct Alerts {
+    static let invalidDeviceInput = AlertItem(title: "Capturing Failed",
+                                              message: "We are unable to capture the video",
+                                              dismissButton: .default(Text("OK"))
+    )
+    
+    static let invalidScannedValue = AlertItem(title: "Invalid Value",
+                                               message: "Video scanned is not valid",
+                                               dismissButton: .default(Text("OK"))
+    )
+}
+
 struct ScannerView: View {
     
-    @State var scannedValue = ""
+    @State private var scannedValue = ""
+    @State private var alertItem: AlertItem?
     
     var body: some View {
         ZStack {
@@ -30,7 +50,7 @@ struct ScannerView: View {
                         .resizable()
                         .frame(width: 260, height: 260)
                     
-                    ScannerViewControllerRepresentable(scannedValue: $scannedValue)
+                    ScannerViewControllerRepresentable(scannedValue: $scannedValue, alertItem: $alertItem)
                         .frame(width: 215, height: 215)
                         .foregroundStyle(Color.black)
                         .clipShape(RoundedRectangle(cornerRadius: 25.0))
@@ -65,6 +85,12 @@ struct ScannerView: View {
                 }
                 
                 Spacer()
+            }
+            .alert(item: $alertItem) { alertItem in
+                Alert(title: Text(alertItem.title),
+                      message: Text(alertItem.message),
+                      dismissButton: alertItem.dismissButton
+                )
             }
         }
     }

@@ -9,8 +9,8 @@ import UIKit
 import AVFoundation
 
 enum CameraErrors: String {
-    case invalidDeviceInput = "We are unable to capture the video"
-    case invalidScannedValue = "Video scanned is not valid"
+    case invalidDeviceInput
+    case invalidScannedValue
 }
 
 

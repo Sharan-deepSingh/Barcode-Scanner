@@ -11,6 +11,7 @@ import SwiftUI
 struct ScannerViewControllerRepresentable: UIViewControllerRepresentable {
     
     @Binding var scannedValue: String
+    @Binding var alertItem: AlertItem?
     
     func makeCoordinator() -> Coordinator {
         Coordinator(scannerViewControllerRepresentable: self)
@@ -31,11 +32,20 @@ struct ScannerViewControllerRepresentable: UIViewControllerRepresentable {
         }
         
         func didFind(barCode: String) {
-            scannerViewControllerRepresentable.scannedValue = barCode
+            DispatchQueue.main.async {
+                self.scannerViewControllerRepresentable.scannedValue = barCode
+            }
         }
         
         func didSurfaceError(error: CameraErrors) {
-            print("Error: ", error.rawValue)
+            DispatchQueue.main.async {
+                switch error {
+                case .invalidDeviceInput:
+                        self.scannerViewControllerRepresentable.alertItem = Alerts.invalidDeviceInput
+                case .invalidScannedValue:
+                    self.scannerViewControllerRepresentable.alertItem = Alerts.invalidScannedValue
+                }
+            }
         }
     }
 }
